@@ -21,10 +21,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 require('pdfjs-dist/web/compatibility');
-require('pdfjs-dist/build/pdf');
-PDFJS.workerSrc = require('pdfjs-dist/build/pdf.worker.js');
-
-PDFJS.disableWorker = true;
+require('pdfjs-dist/build/pdf.combined');
 
 var ReactPDF = function (_Component) {
   _inherits(ReactPDF, _Component);
@@ -160,19 +157,13 @@ var ReactPDF = function (_Component) {
 
       // File is a File
       if (file instanceof File) {
-        var _ret2 = function () {
-          var reader = new FileReader();
+        var reader = new FileReader();
 
-          reader.onloadend = function () {
-            _this2.loadDocument(new Uint8Array(reader.result));
-          };
+        reader.onloadend = function () {
+          _this2.loadDocument(new Uint8Array(reader.result));
+        };
 
-          return {
-            v: reader.readAsArrayBuffer(file)
-          };
-        }();
-
-        if ((typeof _ret2 === 'undefined' ? 'undefined' : _typeof(_ret2)) === "object") return _ret2.v;
+        return reader.readAsArrayBuffer(file);
       }
 
       // File is an ArrayBuffer
