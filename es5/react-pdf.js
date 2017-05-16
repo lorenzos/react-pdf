@@ -12,6 +12,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -160,19 +164,13 @@ var ReactPDF = function (_Component) {
 
       // File is a File
       if (file instanceof File) {
-        var _ret2 = function () {
-          var reader = new FileReader();
+        var reader = new FileReader();
 
-          reader.onloadend = function () {
-            _this2.loadDocument(new Uint8Array(reader.result));
-          };
+        reader.onloadend = function () {
+          _this2.loadDocument(new Uint8Array(reader.result));
+        };
 
-          return {
-            v: reader.readAsArrayBuffer(file)
-          };
-        }();
-
-        if ((typeof _ret2 === 'undefined' ? 'undefined' : _typeof(_ret2)) === "object") return _ret2.v;
+        return reader.readAsArrayBuffer(file);
       }
 
       // File is an ArrayBuffer
@@ -436,21 +434,21 @@ ReactPDF.defaultProps = {
 };
 
 ReactPDF.propTypes = {
-  error: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.node]),
-  file: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.instanceOf(File), _react.PropTypes.instanceOf(Blob), _react.PropTypes.shape({
-    data: _react.PropTypes.object,
-    httpHeaders: _react.PropTypes.object,
-    range: _react.PropTypes.object,
-    url: _react.PropTypes.string
+  error: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.node]),
+  file: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.instanceOf(File), _propTypes2.default.instanceOf(Blob), _propTypes2.default.shape({
+    data: _propTypes2.default.object,
+    httpHeaders: _propTypes2.default.object,
+    range: _propTypes2.default.object,
+    url: _propTypes2.default.string
   })]),
-  loading: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.node]),
-  noData: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.node]),
-  onDocumentError: _react.PropTypes.func,
-  onDocumentLoad: _react.PropTypes.func,
-  onPageError: _react.PropTypes.func,
-  onPageLoad: _react.PropTypes.func,
-  onPageRender: _react.PropTypes.func,
-  pageIndex: _react.PropTypes.number,
-  scale: _react.PropTypes.number,
-  width: _react.PropTypes.number
+  loading: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.node]),
+  noData: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.node]),
+  onDocumentError: _propTypes2.default.func,
+  onDocumentLoad: _propTypes2.default.func,
+  onPageError: _propTypes2.default.func,
+  onPageLoad: _propTypes2.default.func,
+  onPageRender: _propTypes2.default.func,
+  pageIndex: _propTypes2.default.number,
+  scale: _propTypes2.default.number,
+  width: _propTypes2.default.number
 };
